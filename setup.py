@@ -1,4 +1,4 @@
-from distutils.core import setup
+from distutils.core import setup, find_packages
 import distutils.text_file
 from pathlib import Path
 from typing import List
@@ -12,7 +12,7 @@ def _parse_requirements(filename: str) -> List[str]:
 setup(
     name='srabuilder',
     version='0.0.1',
-    packages=['srabuilder',],
+    packages=find_packages(),
     install_requires=_parse_requirements('requirements.txt'),
     license='MIT',
     long_description='placeholder',
