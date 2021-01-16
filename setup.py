@@ -1,4 +1,5 @@
-from distutils.core import setup, find_packages
+from distutils.core import setup
+from setuptools import find_packages
 import distutils.text_file
 from pathlib import Path
 from typing import List
