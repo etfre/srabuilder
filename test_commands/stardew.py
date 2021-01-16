@@ -501,24 +501,24 @@ mod_requests = {}
 game_state = GameState()
 
 
-def setup_async_loop(loop, kaldi_engine):
+def setup_async_loop(loop):
     def async_setup(l):
         l.set_exception_handler(exception_handler)
         l.create_task(async_readline())
-        l.create_task(heartbeat(kaldi_engine, 60))
+        l.create_task(heartbeat(60))
         l.run_forever()
 
     def exception_handler(loop, context):
         # This only works when there are no references to the above tasks.
         # https://bugs.python.org/issue39256y'
-        kaldi_engine.disconnect()
+        get_engine().disconnect()
         raise context["exception"]
 
     async_thread = threading.Thread(target=async_setup, daemon=True, args=(loop,))
     async_thread.start()
 
 
-async def heartbeat(kaldi_engine, timeout):
+async def heartbeat(, timeout):
     while True:
         fut = request("HEARTBEAT")
         try:
@@ -527,7 +527,7 @@ async def heartbeat(kaldi_engine, timeout):
             raise e
         await asyncio.sleep(timeout)
 
-
+c
 async def async_readline():
     # Is there a better way to read async stdin on Windows?
     q = queue.Queue()

@@ -1,5 +1,4 @@
 from dragonfly import *
-import actions
 import srabuilder.actions
 from srabuilder import rules, clipboard
 
@@ -16,7 +15,7 @@ def log_dir():
         os.mkdir(tdir)
     except FileExistsError:
         pass
-    return tdir
+    return tdiry
 
 
 def linux_path(win_path):
