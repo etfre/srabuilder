@@ -518,7 +518,7 @@ def setup_async_loop(loop):
     async_thread.start()
 
 
-async def heartbeat(, timeout):
+async def heartbeat(timeout):
     while True:
         fut = request("HEARTBEAT")
         try:
@@ -527,7 +527,7 @@ async def heartbeat(, timeout):
             raise e
         await asyncio.sleep(timeout)
 
-c
+
 async def async_readline():
     # Is there a better way to read async stdin on Windows?
     q = queue.Queue()

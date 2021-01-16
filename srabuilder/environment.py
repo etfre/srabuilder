@@ -17,12 +17,12 @@ class SpeechRecognitionEnvironment:
         return gram
 
 
-def load_environments(engine, map_contexts_to_builder):
+def load_environments(map_contexts_to_builder):
     # This approach assumes contexts without a direct ancestor/descendant relationship
     # are mutually exclusive, otherwise multiple overlapping grammars could be active
     # at the same time. Not sure whether that's a problem though.
     # map_contexts_to_builder = {
-    #     (contexts.stardew,): stardew.rule_builder(engine),
+    #     (contexts.stardew,): stardew.rule_builder(),
     # }
     envs = []
     root = None

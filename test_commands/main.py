@@ -23,6 +23,7 @@ import sys
 from dragonfly import RecognitionObserver, get_engine
 from dragonfly.log import setup_log
 from srabuilder import sleep, environment
+import srabuilder
 
 import contexts
 import global_
@@ -69,22 +70,7 @@ def command_line_loop(engine):
 
 def main(args):
     logging.basicConfig(level=logging.INFO)
-    # use abspath for model dir, this may change with app freezing
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    model_dir = os.path.join(current_dir, "..", "kaldi_model")
-    # Set any configuration options here as keyword arguments.
-    engine = get_engine(
-        "kaldi",
-        model_dir=model_dir,
-        expected_error_rate_threshold=0.05,
-        # tmp_dir='kaldi_tmp',  # default for temporary directory
-        # vad_aggressiveness=3,  # default aggressiveness of VAD
-        vad_padding_start_ms=0,  # default ms of required silence surrounding VAD
-        # vad_padding_end_ms=500,  # default ms of required silence surrounding VAD
-        vad_padding_end_ms=250,  # default ms of required silence surrounding VAD
-    )
-    # Call connect() now that the engine configuration is set.
-    engine.connect()
+    engine = srabuilder.setup_engine()
 
     # Register a recognition observer
     observer = Observer()
@@ -103,24 +89,13 @@ def main(args):
         (contexts.vscode, contexts.javascript): javascript.rule_builder(),
         (contexts.visual_studio,): visual_studio.rule_builder(),
     }
-    envs = environment.load_environments(engine, map_contexts_to_builder)
-    environment.load_grammars(envs)
+    srabuilder.load_environment_grammars(map_contexts_to_builder)
     import _dictation
 
     _dictation.load_grammar()
 
-    # Start the engine's main recognition loop
-    # engine.mimic('alpha three bravo charlie zulu eight six')
-    engine.prepare_for_recognition()
-    engine.mimic("start listening")
-
     # threading.Thread(target=command_line_loop, args=(engine,), daemon=True).start()
-    try:
-        # Loop forever
-        print("Listening...")
-        engine.do_recognition()
-    except KeyboardInterrupt:
-        pass
+    srabuilder.run_engine()
 
 
 if __name__ == "__main__":

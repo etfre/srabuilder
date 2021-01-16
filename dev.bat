@@ -1,1 +1,1 @@
-scripts\activate && code . && cd df
+scripts\activate && code . && cd srabuilder
