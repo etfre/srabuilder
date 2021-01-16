@@ -5,6 +5,9 @@ import threading
 import time
 import logging
 import sys
+from io import BytesIO
+from zipfile import ZipFile
+import urllib.request
 
 from dragonfly import RecognitionObserver, get_engine
 from dragonfly.log import setup_log
@@ -23,10 +26,21 @@ if False:
 else:
     setup_log()
 
+def download_model(write_dir):
+    model_url = 'https://github.com/daanzu/kaldi-active-grammar/releases/download/v1.8.0/kaldi_model_daanzu_20200905_1ep-biglm.zip'
+    print(f'Downloading speech recognition model from {model_url}, this may take a few minutes...')
+    url_open = urllib.request.urlopen(model_url)
+    with ZipFile(BytesIO(url_open.read())) as my_zip_file:
+        my_zip_file.extractall(write_dir)
+    print('Done!')
+
 def setup_engine():
     # use abspath for model dir, this may change with app freezing
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    model_dir = os.path.join(current_dir, "..", "kaldi_model")
+    package_root = os.path.join(current_dir, "..")
+    model_dir = os.path.join(package_root, "kaldi_model")
+    if not os.path.isdir(model_dir):
+        download_model(package_root)
     # Set any configuration options here as keyword arguments.
     engine = get_engine(
         "kaldi",
