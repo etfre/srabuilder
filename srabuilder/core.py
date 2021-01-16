@@ -8,10 +8,13 @@ import sys
 from io import BytesIO
 from zipfile import ZipFile
 import urllib.request
+from pathlib import Path
 
 from dragonfly import RecognitionObserver, get_engine
 from dragonfly.log import setup_log
 from srabuilder import sleep, environment
+
+MODELS_DIR = os.path.join(str(Path.home()), '.srabuilder', 'models')
 
 # --------------------------------------------------------------------------
 # Set up basic logging.
@@ -37,10 +40,9 @@ def download_model(write_dir):
 def setup_engine():
     # use abspath for model dir, this may change with app freezing
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    package_root = os.path.join(current_dir, "..")
-    model_dir = os.path.join(package_root, "kaldi_model")
+    model_dir = os.path.join(MODELS_DIR, "kaldi_model")
     if not os.path.isdir(model_dir):
-        download_model(package_root)
+        download_model(MODELS_DIR)
     # Set any configuration options here as keyword arguments.
     engine = get_engine(
         "kaldi",
