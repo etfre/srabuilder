@@ -39,6 +39,7 @@ errors = {
 mapping = {
     "import": Text("import "),
     "assign": Text(" = "),
+    "compare": Text(" == "),
     "list comprehension": "[x for x in ]{left}",
     "from": Text("from "),
     "assert": Text("assert "),
@@ -52,7 +53,10 @@ mapping = {
     "name or": Text(" or "),
     "name if": Text("if "),
     "<errors>": Text("%(errors)s"),
+    "if statement": "if :{left}",
     "if else": "if :\npass\nelse:\npass{up:3}{left}",
+    "else if": "elif :{left}",
+    "else statement": "else:{enter}",
     "try except": "try:\npass\nexcept:\npass{up:2}{c-d}",
     "true": Text("True"),
     "false": Text("False"),
