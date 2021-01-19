@@ -100,6 +100,8 @@ repeat_mapping = {
     "indent": "{c-]}",
     "close tab": "{c-w}",
     "grab": "{c-d}",
+    "expand": "{as-right}",
+    "shrink": "{as-left}",
 }
 
 

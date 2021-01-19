@@ -57,7 +57,6 @@ mapping = {
     "true": Text("True"),
     "false": Text("False"),
     "none": Text("None"),
-    "list": "[]{left}",
     "dictionary": "{{}}{left}",
     "slice": "[:]{left:2}",
     "new function": "def ():{left:3}",
@@ -69,6 +68,10 @@ mapping = {
     "write file": "with open(, 'w') as f:{left:12}",
     "read binary": "with open(, 'rb') as f:{left:14}",
     "write binary": "with open(, 'wb') as f:{left:14}",
+    "with statement": "with :{left}",
+    "with as": "with  as :{left:5}",
+    "for loop": "for :{left}",
+    "while loop": "while :{left}",
 }
 
 

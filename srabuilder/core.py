@@ -37,7 +37,7 @@ def download_model(write_dir):
         my_zip_file.extractall(write_dir)
     print('Done!')
 
-def setup_engine():
+def setup_engine(silence_timeout=500):
     # use abspath for model dir, this may change with app freezing
     current_dir = os.path.dirname(os.path.abspath(__file__))
     model_dir = os.path.join(MODELS_DIR, "kaldi_model")
@@ -51,8 +51,7 @@ def setup_engine():
         # tmp_dir='kaldi_tmp',  # default for temporary directory
         # vad_aggressiveness=3,  # default aggressiveness of VAD
         vad_padding_start_ms=0,  # default ms of required silence surrounding VAD
-        # vad_padding_end_ms=500,  # default ms of required silence surrounding VAD
-        vad_padding_end_ms=250,  # default ms of required silence surrounding VAD
+        vad_padding_end_ms=silence_timeout,  # default ms of required silence surrounding VAD
     )
     # Call connect() now that the engine configuration is set.
     engine.connect()
