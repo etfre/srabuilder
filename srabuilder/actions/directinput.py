@@ -53,6 +53,7 @@ CODES = {
     "n": 0x31,
     "m": 0x32,
     "ctrl": 0x1D,
+    "tab": 0x0F,
     "pageup": 0xC9 + 1024,
     "pagedown": 0xD1 + 1024,
     "up": 0xC8,
