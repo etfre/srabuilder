@@ -76,6 +76,7 @@ mapping = {
     "with as": "with  as :{left:5}",
     "for loop": "for :{left}",
     "while loop": "while :{left}",
+    "string index": '[""]{left:2}',
 }
 
 
