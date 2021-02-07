@@ -29,7 +29,7 @@ release = Key("shift:up, ctrl:up, alt:up")
 
 # For repeating of characters.
 specialCharMap = {
-    "(pipe)": "|",
+    "(Vertical)": "|",
     "(dash)": "-",
     "period": ".",
     "comma": ",",
@@ -146,7 +146,6 @@ grammarCfg.cmd.map = Item(
         "colon": Key("colon"),
         "(semicolon|semi colon)": Key("semicolon"),
         "comma": Key("comma"),
-        "dot": Key("dot"),  # cannot be followed by a repeat count
         "dash": Key("hyphen"),
         "downscore": Key("underscore"),
         "<letters>": Text("%(letters)s"),
