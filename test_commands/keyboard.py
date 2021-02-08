@@ -179,7 +179,6 @@ grammarCfg.cmd.map = Item(
         "undo": Key("c-z"),
         "redo": Key("c-y"),
         "number <digits>": Text("%(digits)s"),
-        "jump": Text(", "),
     },
     namespace={
         "Key": Key,
