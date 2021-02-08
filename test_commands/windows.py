@@ -14,6 +14,10 @@ applications = {
         "title": "microsoft visual studio",
         "executable": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\IDE\\devenv.exe",
     },
+    "chrome": {
+        "title": "google chrome",
+        "executable": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+    },
     "terminal": {"title": "evan@", "executable": "wt.exe"},
     "powershell": {"title": "windows powershell"},
     "git bash": {
