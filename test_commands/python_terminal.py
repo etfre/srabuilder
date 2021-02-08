@@ -18,8 +18,8 @@ basic = {
     "pip": Text("pip "),
     "pip install": Text("pip install "),
     "pip freeze": Text("pip freeze > requirements.txt") + Key("enter"),
-    "activate virtual environment": Text("source bin/activate") + Key("enter"),
-    "create virtual environment": Text("python3 -m venv .") + Key("enter"),
+    "activate virtual": Text("source bin/activate") + Key("enter"),
+    "create virtual": Text("python3 -m venv .") + Key("enter"),
     "flask run": Text("python -m flask run") + Key("enter"),
 }
 
