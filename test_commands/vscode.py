@@ -83,6 +83,7 @@ non_repeat_mapping = {
     "line <n>": between(
         Key("c-g"), Function(lambda **k: Text(str(k["n"])).execute()), Key("enter")
     ),
+    "split editor": "{c-backslash}"
 }
 
 repeat_mapping = {
@@ -102,6 +103,10 @@ repeat_mapping = {
     "grab": "{c-d}",
     "expand": "{as-right}",
     "shrink": "{as-left}",
+    "previous editor": "{c-k}{c-left}",
+    "next editor": "{c-k}{c-right}",
+    "move editor right": "{c-k}{left}",
+    "move editor left": "{c-k}{right}",
 }
 
 

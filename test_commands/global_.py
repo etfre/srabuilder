@@ -2,6 +2,7 @@ from dragonfly import *
 
 import contexts
 import keyboard
+import mouse
 import windows
 from srabuilder import rules
 
@@ -16,6 +17,7 @@ basic_mapping = {
 def rule_builder():
     builder = rules.RuleBuilder()
     builder.repeat.append(keyboard.root_rule())
+    builder.repeat.append(mouse.root_rule())
     builder.basic.append(
         MappingRule(mapping=basic_mapping, exported=False, name="state_basic")
     )
