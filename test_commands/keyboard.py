@@ -49,7 +49,7 @@ specialCharMap = {
     "(equal|equals)": "=",
     "plus": "+",
     "space": " ",
-    "bang": "!",
+    "exclamation": "!",
     "question": "?",
     "caret": "^",
     "north": "up",
