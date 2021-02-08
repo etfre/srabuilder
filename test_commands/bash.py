@@ -158,6 +158,7 @@ basic = {
     "touch": Text("touch "),
     "make deer": Text("mkdir "),
     "remove": Text("rm "),
+    "source": Text("source "),
     "cd": Text("cd "),
     "list files": Text("ls | cat -n") + Key("enter"),
     "list all": Text("ls -a") + Key("enter"),
