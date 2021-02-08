@@ -161,10 +161,10 @@ basic = {
     "cd": Text("cd "),
     "list files": Text("ls | cat -n") + Key("enter"),
     "list all": Text("ls -a") + Key("enter"),
-    "drop <n>": wrap_n(drop),
-    "copy <n>": wrap_n(list_files_to_clipboard),
+    "<n> drop": wrap_n(drop),
+    "<n> copy": wrap_n(list_files_to_clipboard),
     "to clipboard": Text("| clip.exe") + Key("enter"),
-    "climb [<n>]": (Text("cd ..") + Text("/..") * Repeat(extra="n", count=-1))
+    "[<n>] climb": (Text("cd ..") + Text("/..") * Repeat(extra="n", count=-1))
     + Key("enter"),
     "git": Text("git "),
     "git commit": srabuilder.actions.type_and_move('git commit -m ""', left=1),

@@ -58,8 +58,8 @@ def do_select(**kw):
 
 non_repeat_mapping = {
     "<clip> <movements>": Function(clip_move),
-    "<clip> <movements_multiple> [<n>]": Function(clip_move),
-    "<clip> <select_actions_multiple> [<n>]": Function(do_select),
+    "[<n>] <clip> <movements_multiple>": Function(clip_move),
+    "[<n>] <clip> <select_actions_multiple>": Function(do_select),
     "<clip> <select_actions_single>": Function(do_select),
     "explorer": "{cs-e}",
     "source control": "{cs-g}g",

@@ -62,7 +62,7 @@ class RepeatRule(CompoundRule):
 
 
 def new_repeat_rule(repeat):
-    spec = f"<repeat> [<n>]"
+    spec = f"[<n>] <repeat>"
     extras = [repeat, num]
     name = "something"
     rule = RepeatRule(spec=spec, extras=extras, name=name, exported=False)
@@ -110,7 +110,7 @@ def yield_actions(node):
             if len(result) == 1:
                 yield result[0]
             elif result:
-                action, count = result
+                count, action = result
                 if count > 1:
                     yield action * Repeat(count=count)
                 else:

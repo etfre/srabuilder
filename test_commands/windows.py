@@ -35,7 +35,7 @@ def start_app(**kw):
 
 
 non_repeat_mapping = {
-    "open <applications> [<n>]": Function(open_app),
+    "[<n>] open <applications>": Function(open_app),
     "start <applications>": Function(start_app),
     "maximize window": Function(lambda: Window.get_foreground().maximize()),
     "minimize window": Function(lambda: Window.get_foreground().minimize()),
