@@ -164,7 +164,7 @@ grammarCfg.cmd.map = Item(
         "close brace": Key("rbrace"),
         "close bracket": Key("rbracket"),
         "close pen": Key("rparen"),
-        "(parentheses|pens)": Text("()"),
+        "parentheses": Text("()"),
         "brackets": Text("[]"),
         "braces": Text("{}"),
         "escape": Key("escape"),
