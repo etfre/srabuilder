@@ -17,22 +17,22 @@ directions = {"up": "up", "right": "right", "down": "down", "left": "left"}
 
 
 basic = {
-    # "new panel right": Text("python -m flask run") + Key("cs-d"),
     "duplicate tab": Key("cs-d"),
     "close tab": Key("cs-w"),
     "tab right": Key("c-tab"),
     "tab left": Key("cs-tab"),
-    "new panel right": Key("as-plus"),
-    "new panel down": Key("as-minus"),
-    "close panel": Key("cs-w"),
+    "new editor right": Key("as-plus"),
+    "new editor down": Key("as-minus"),
+    "close editor": Key("cs-w"),
     "focus <directions>": Key("a-%(directions)s"),
-    # "focus right": Key('a-right'),
-    # "focus down": Key('a-down'),
-    # "focus left": Key('a-left'),
 }
 
 repeat = {
     "resize <directions>": Key("as-%(directions)s"),
+    "scroll up": Key("cs-up"),
+    "scroll down": Key("cs-down"),
+    "page scroll up": Key("cs-pgup"),
+    "page scroll down": Key("cs-pgdown"),
 }
 
 
