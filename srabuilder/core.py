@@ -37,12 +37,12 @@ def download_model(write_dir):
         my_zip_file.extractall(write_dir)
     print('Done!')
 
-def setup_engine(silence_timeout=500):
+def setup_engine(silence_timeout=500, models_dir=MODELS_DIR):
     # use abspath for model dir, this may change with app freezing
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    model_dir = os.path.join(MODELS_DIR, "kaldi_model")
+    model_dir = os.path.join(models_dir, "kaldi_model")
     if not os.path.isdir(model_dir):
-        download_model(MODELS_DIR)
+        download_model(models_dir)
     # Set any configuration options here as keyword arguments.
     engine = get_engine(
         "kaldi",
