@@ -85,10 +85,10 @@ non_repeat_mapping = {
     "block comment": "{as-a}",
     "fuzzy": "{c-p}",
     "save file": "{c-s}",
-    "search file": "{c-f}",
-    "search project": "{cs-f}",
-    "replace [in] file": "{c-h}",
-    "replace [in] project": "{cs-h}",
+    "(search file) | (file search)": "{c-f}",
+    "(search project) | (project search)": "{cs-f}",
+    "(replace [in] file) | (file replace)": "{c-h}",
+    "(replace [in] project) | (project replace)": "{cs-h}",
     "surround parentheses": surround("(", ")"),
     "surround blocks": surround("[", "]"),
     "surround single": surround("'", "'"),
@@ -99,6 +99,7 @@ non_repeat_mapping = {
         Key("c-g"), Function(lambda **k: Text(str(k["n"])).execute()), Key("enter")
     ),
     "split editor": "{c-backslash}",
+    "close editor": "{c-f4}",
     **git_commands
 }
 
