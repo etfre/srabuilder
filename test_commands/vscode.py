@@ -56,15 +56,19 @@ def do_select(**kw):
         clip_action[clip].execute()
 
 git_commands = {
-    "git push": "{f1}git push{enter}",
-    "git commit": "{f1}git commit{enter}",
-    "git commit all": "{f1}git commit all{enter}",
-    "git stage [changes]": "{f1}git stage{enter}",
-    "git stage all [changes]": "{f1}git stage all changes{enter}",
-    "git unstage [changes]": "{f1}git unstage{enter}",
-    "git unstage all [changes]": "{f1}git unstage all changes{enter}",
-    "git create branch": "{f1}git create branch{enter}",
-    "git custom create branch ": "{f1}git create branch from{enter}",
+    "git push": "{f1}git push",
+    "git stash": "{f1}git stash",
+    "git pop stash": "{f1}git pop latest stash",
+    "git commit": "{f1}git commit",
+    "git commit all": "{f1}git commit all",
+    "git stage [changes]": "{f1}git stage",
+    "git stage all [changes]": "{f1}git stage all changes",
+    "git unstage [changes]": "{f1}git unstage",
+    "git unstage all [changes]": "{f1}git unstage all changes",
+    "git create branch": "{f1}git create branch",
+    "git custom create branch ": "{f1}git create branch from",
+    "git open changes ": "{f1}git open changes",
+    "git discard changes ": "{f1}git discard changes",
 }
 
 non_repeat_mapping = {
