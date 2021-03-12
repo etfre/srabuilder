@@ -55,6 +55,9 @@ def do_select(**kw):
         time.sleep(0.2)
         clip_action[clip].execute()
 
+git_commands = {
+    "git push": "{f1}git push{enter}",
+}
 
 non_repeat_mapping = {
     "<clip> <movements>": Function(clip_move),
@@ -83,7 +86,8 @@ non_repeat_mapping = {
     "line <n>": between(
         Key("c-g"), Function(lambda **k: Text(str(k["n"])).execute()), Key("enter")
     ),
-    "split editor": "{c-backslash}"
+    "split editor": "{c-backslash}",
+    **git_commands
 }
 
 repeat_mapping = {

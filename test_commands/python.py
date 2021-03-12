@@ -46,7 +46,7 @@ mapping = {
     "assert": Text("assert "),
     "return": Text("return "),
     "break": Text("break"),
-    "continue": Text("continue "),
+    "continue": Text("continue"),
     "name in": Text(" in "),
     "name is": Text(" is "),
     "not": Text(" not "),
