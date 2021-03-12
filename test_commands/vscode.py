@@ -61,7 +61,7 @@ non_repeat_mapping = {
     "[<n>] <clip> <movements_multiple>": Function(clip_move),
     "[<n>] <clip> <select_actions_multiple>": Function(do_select),
     "<clip> <select_actions_single>": Function(do_select),
-    "explorer": "{cs-e}",
+    "file explorer": "{cs-e}",
     "source control": "{cs-g}g",
     "command palette": "{f1}",
     "rename": "{f2}",

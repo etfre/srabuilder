@@ -4,6 +4,7 @@ from srabuilder import rules
 functions = {
     "all": "all",
     "any": "any",
+    "enumerate": "enumerate",
     "eye d": "id",
     "float": "float",
     "input": "input",
@@ -51,7 +52,8 @@ mapping = {
     "not": Text(" not "),
     "name and": Text(" and "),
     "name or": Text(" or "),
-    "name if": Text("if "),
+    "name if": Text("if "),                    
+    "name while": Text("if "),                    
     "<errors>": Text("%(errors)s"),
     "if statement": "if :{left}",
     "if else": "if :\npass\nelse:\npass{up:3}{left}",
@@ -75,6 +77,7 @@ mapping = {
     "with statement": "with :{left}",
     "with as": "with  as :{left:5}",
     "for loop": "for :{left}",
+    "for enumerate": "for i,  in enumerate():{left:16}",
     "while loop": "while :{left}",
     "string index": '[""]{left:2}',
 }

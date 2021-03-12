@@ -112,6 +112,8 @@ letterMap = {
     "(zulu) ": "z",
 }
 
+all_chars = {**letterMap, **specialCharMap}
+
 # generate uppercase versions of every letter
 upperLetterMap = {}
 for letter in letterMap:
@@ -150,12 +152,8 @@ grammarCfg.cmd.map = Item(
         "downscore": Key("underscore"),
         "<letters>": Text("%(letters)s"),
         "<char>": Key("%(char)s"),
-        "<modifierSingle> <letters>": Key("%(modifierSingle)s:down")
-        + Text("%(letters)s")
-        + Key("%(modifierSingle)s:up"),
-        "<modifierSingle> <char>": Key("%(modifierSingle)s:down")
-        + Key("%(char)s")
-        + Key("%(modifierSingle)s:up"),
+        "<modifierSingle> <all_chars>": Key("%(modifierSingle)s:down")+ Key("%(all_chars)s") + Key("%(modifierSingle)s:up"),
+        "<modifier1> <modifier2> <all_chars>": Key("%(modifier1)s:down") + Key("%(modifier2)s:down") + Key("%(all_chars)s") + Key("%(modifier2)s:up") + Key("%(modifier1)s:down") ,
         "open angle": Key("langle"),
         "open brace": Key("lbrace"),
         "open bracket": Key("lbracket"),
@@ -195,9 +193,10 @@ class KeystrokeRule(MappingRule):
         Dictation("text2"),
         Choice("char", specialCharMap),
         Choice("letters", letterMap),
+        Choice("all_chars", all_chars),
         rules.digits,
-        Choice("modifier1", modifierMap),
-        Choice("modifier2", modifierMap),
+        Choice("modifier1", singleModifierMap),
+        Choice("modifier2", singleModifierMap),
         Choice("modifierSingle", singleModifierMap),
     ]
     defaults = {
