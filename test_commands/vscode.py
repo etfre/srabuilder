@@ -57,6 +57,14 @@ def do_select(**kw):
 
 git_commands = {
     "git push": "{f1}git push{enter}",
+    "git commit": "{f1}git commit{enter}",
+    "git commit all": "{f1}git commit all{enter}",
+    "git stage [changes]": "{f1}git stage{enter}",
+    "git stage all [changes]": "{f1}git stage all changes{enter}",
+    "git unstage [changes]": "{f1}git unstage{enter}",
+    "git unstage all [changes]": "{f1}git unstage all changes{enter}",
+    "git create branch": "{f1}git create branch{enter}",
+    "git custom create branch ": "{f1}git create branch from{enter}",
 }
 
 non_repeat_mapping = {
