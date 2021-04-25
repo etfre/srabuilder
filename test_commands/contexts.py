@@ -15,6 +15,7 @@ def set_language(lang):
 vscode = AppContext(title="Visual Studio Code")
 visual_studio = AppContext(title="Visual Studio") & ~vscode
 firefox = AppContext(title="Mozilla Firefox")
+chrome = AppContext(title="Google Chrome")
 windows_terminal = AppContext(title="evan@")
 git_bash = AppContext(title="mingw64")
 stardew = AppContext(title="stardew")

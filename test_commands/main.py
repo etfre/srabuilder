@@ -29,6 +29,7 @@ import contexts
 import global_
 import python
 import firefox
+import chrome
 import javascript
 import vscode
 import visual_studio
@@ -81,6 +82,7 @@ def main(args):
     map_contexts_to_builder = {
         (): global_.rule_builder(),
         (contexts.firefox,): firefox.rule_builder(),
+        (contexts.chrome,): chrome.rule_builder(),
         (contexts.bash,): bash.rule_builder()
         .merge(python_terminal.rule_builder())
         .merge(windows_terminal.rule_builder()),
