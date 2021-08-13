@@ -38,7 +38,7 @@ def surround(left, right):
     )
 
 
-def parse(s: str):
+def parse(s: str, text_fn=dragonfly.Text, key_fn=dragonfly.Key):
     if not s:
         raise RuntimeError("Can't parse empty string")
     current_text = ""
@@ -52,13 +52,13 @@ def parse(s: str):
         if char == "{" and next_char != "{" and not is_key:
             is_key = True
             if current_text:
-                actions.append(dragonfly.Text(current_text))
+                actions.append(text_fn(current_text))
                 current_text = ""
         elif char == "}" and next_char != "}":
             if not is_key:
                 raise RuntimeError("Unmatched } token")
             if current_text:
-                actions.append(dragonfly.Key(current_text))
+                actions.append(key_fn(current_text))
                 current_text = ""
             is_key = False
         else:
@@ -66,5 +66,5 @@ def parse(s: str):
     if is_key:
         raise RuntimeError("Unmatched { token")
     if current_text:
-        actions.append(dragonfly.Text(current_text))
+        actions.append(text_fn(current_text))
     return between(*actions)

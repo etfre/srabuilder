@@ -137,10 +137,10 @@ class RootRule(BasicRule):
 
 
 class ParsedRule(MappingRule):
-    def __init__(self, mapping, **kwargs):
+    def __init__(self, mapping, text_fn=Text, key_fn=Key, **kwargs):
         import srabuilder.actions
 
         parsed_mapping = {}
         for k, v in mapping.items():
-            parsed_mapping[k] = srabuilder.actions.parse(v) if isinstance(v, str) else v
+            parsed_mapping[k] = srabuilder.actions.parse(v, text_fn=text_fn, key_fn=key_fn) if isinstance(v, str) else v
         super().__init__(mapping=parsed_mapping, exported=False, **kwargs)
