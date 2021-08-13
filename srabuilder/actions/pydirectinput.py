@@ -49,12 +49,10 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
-
 import ctypes
 import functools
 import inspect
 import time
-
 
 SendInput = ctypes.windll.user32.SendInput
 MapVirtualKey = ctypes.windll.user32.MapVirtualKeyW
@@ -144,17 +142,17 @@ KEYBOARD_MAPPING = {
     'subtract': 0x4A,
     'add': 0x4E,
     'decimal': 0x53,
-    #KEY_NUMPAD_ENTER: 0x9C + 1024,
-    #KEY_NUMPAD_1: 0x4F,
-    #KEY_NUMPAD_2: 0x50,
-    #KEY_NUMPAD_3: 0x51,
-    #KEY_NUMPAD_4: 0x4B,
-    #KEY_NUMPAD_5: 0x4C,
-    #KEY_NUMPAD_6: 0x4D,
-    #KEY_NUMPAD_7: 0x47,
-    #KEY_NUMPAD_8: 0x48,
-    #KEY_NUMPAD_9: 0x49,
-    #KEY_NUMPAD_0: 0x52,
+    'numpadenter': 0x9C + 1024,
+    'numpad1': 0x4F,
+    'numpad2': 0x50,
+    'numpad3': 0x51,
+    'numpad4': 0x4B,
+    'numpad5': 0x4C,
+    'numpad6': 0x4D,
+    'numpad7': 0x47,
+    'numpad8': 0x48,
+    'numpad9': 0x49,
+    'numpad0': 0x52,
     # end numpad
     'tab': 0x0F,
     'q': 0x10,
@@ -224,6 +222,8 @@ KEYBOARD_MAPPING = {
 # C struct redefinitions
 
 PUL = ctypes.POINTER(ctypes.c_ulong)
+
+
 class KeyBdInput(ctypes.Structure):
     _fields_ = [("wVk", ctypes.c_ushort),
                 ("wScan", ctypes.c_ushort),
@@ -231,27 +231,32 @@ class KeyBdInput(ctypes.Structure):
                 ("time", ctypes.c_ulong),
                 ("dwExtraInfo", PUL)]
 
+
 class HardwareInput(ctypes.Structure):
     _fields_ = [("uMsg", ctypes.c_ulong),
                 ("wParamL", ctypes.c_short),
                 ("wParamH", ctypes.c_ushort)]
+
 
 class MouseInput(ctypes.Structure):
     _fields_ = [("dx", ctypes.c_long),
                 ("dy", ctypes.c_long),
                 ("mouseData", ctypes.c_ulong),
                 ("dwFlags", ctypes.c_ulong),
-                ("time",ctypes.c_ulong),
+                ("time", ctypes.c_ulong),
                 ("dwExtraInfo", PUL)]
+
 
 class POINT(ctypes.Structure):
     _fields_ = [("x", ctypes.c_long),
                 ("y", ctypes.c_long)]
 
+
 class Input_I(ctypes.Union):
     _fields_ = [("ki", KeyBdInput),
-                 ("mi", MouseInput),
-                 ("hi", HardwareInput)]
+                ("mi", MouseInput),
+                ("hi", HardwareInput)]
+
 
 class Input(ctypes.Structure):
     _fields_ = [("type", ctypes.c_ulong),
@@ -268,7 +273,7 @@ def failSafeCheck():
     if FAILSAFE and tuple(position()) in FAILSAFE_POINTS:
         raise FailSafeException(
             "PyDirectInput fail-safe triggered from mouse moving to a corner of the screen. To disable this " \
-                "fail-safe, set pydirectinput.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED."
+            "fail-safe, set pydirectinput.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED."
         )
 
 
@@ -280,7 +285,6 @@ def _handlePause(_pause):
 
 # direct copy of _genericPyAutoGUIChecks()
 def _genericPyDirectInputChecks(wrappedFunction):
-
     @functools.wraps(wrappedFunction)
     def wrapper(*args, **kwargs):
         funcArgs = inspect.getcallargs(wrappedFunction, *args, **kwargs)
@@ -324,7 +328,6 @@ def size():
 # Ignored parameters: duration, tween, logScreenshot
 @_genericPyDirectInputChecks
 def mouseDown(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScreenshot=None, _pause=True):
-
     if not x is None or not y is None:
         moveTo(x, y)
 
@@ -349,7 +352,6 @@ def mouseDown(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScre
 # Ignored parameters: duration, tween, logScreenshot
 @_genericPyDirectInputChecks
 def mouseUp(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScreenshot=None, _pause=True):
-    
     if not x is None or not y is None:
         moveTo(x, y)
 
@@ -373,8 +375,8 @@ def mouseUp(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScreen
 
 # Ignored parameters: duration, tween, logScreenshot
 @_genericPyDirectInputChecks
-def click(x=None, y=None, clicks=1, interval=0.0, button=PRIMARY, duration=None, tween=None, logScreenshot=None, _pause=True):
-    
+def click(x=None, y=None, clicks=1, interval=0.0, button=PRIMARY, duration=None, tween=None, logScreenshot=None,
+          _pause=True):
     if not x is None or not y is None:
         moveTo(x, y)
 
@@ -391,7 +393,7 @@ def click(x=None, y=None, clicks=1, interval=0.0, button=PRIMARY, duration=None,
 
     for i in range(clicks):
         failSafeCheck()
-        
+
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
         ii_.mi = MouseInput(0, 0, 0, ev, 0, ctypes.pointer(extra))
@@ -469,6 +471,8 @@ def moveRel(xOffset=None, yOffset=None, duration=None, tween=None, logScreenshot
         ii_.mi = MouseInput(xOffset, yOffset, 0, MOUSEEVENTF_MOVE, 0, ctypes.pointer(extra))
         command = Input(ctypes.c_ulong(0), ii_)
         SendInput(1, ctypes.pointer(command), ctypes.sizeof(command))
+
+
 move = moveRel
 
 
@@ -483,9 +487,13 @@ move = moveRel
 @_genericPyDirectInputChecks
 def keyDown(key, logScreenshot=None, _pause=True):
     if not key in KEYBOARD_MAPPING or KEYBOARD_MAPPING[key] is None:
-        return 
+        return
 
     keybdFlags = KEYEVENTF_SCANCODE
+
+    # Init event tracking
+    insertedEvents = 0
+    expectedEvents = 1
 
     # arrow keys need the extended key flag
     if key in ['up', 'left', 'down', 'right']:
@@ -494,19 +502,26 @@ def keyDown(key, logScreenshot=None, _pause=True):
         # https://stackoverflow.com/questions/14026496/sendinput-sends-num8-when-i-want-to-send-vk-up-how-come
         # https://handmade.network/wiki/2823-keyboard_inputs_-_scancodes,_raw_input,_text_input,_key_names
         if ctypes.windll.user32.GetKeyState(0x90):
+            # We need to press two keys, so we expect to have inserted 2 events when done
+            expectedEvents = 2
             hexKeyCode = 0xE0
             extra = ctypes.c_ulong(0)
             ii_ = Input_I()
             ii_.ki = KeyBdInput(0, hexKeyCode, KEYEVENTF_SCANCODE, 0, ctypes.pointer(extra))
-            x = Input( ctypes.c_ulong(1), ii_)
-            SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+            x = Input(ctypes.c_ulong(1), ii_)
+
+            # SendInput returns the number of event successfully inserted into input stream
+            # https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput#return-value
+            insertedEvents += SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
     hexKeyCode = KEYBOARD_MAPPING[key]
     extra = ctypes.c_ulong(0)
     ii_ = Input_I()
     ii_.ki = KeyBdInput(0, hexKeyCode, keybdFlags, 0, ctypes.pointer(extra))
-    x = Input( ctypes.c_ulong(1), ii_)
-    SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+    x = Input(ctypes.c_ulong(1), ii_)
+    insertedEvents += SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+
+    return insertedEvents == expectedEvents
 
 
 # Ignored parameters: logScreenshot
@@ -514,9 +529,13 @@ def keyDown(key, logScreenshot=None, _pause=True):
 @_genericPyDirectInputChecks
 def keyUp(key, logScreenshot=None, _pause=True):
     if not key in KEYBOARD_MAPPING or KEYBOARD_MAPPING[key] is None:
-        return 
+        return
 
     keybdFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP
+
+    # Init event tracking
+    insertedEvents = 0
+    expectedEvents = 1
 
     # arrow keys need the extended key flag
     if key in ['up', 'left', 'down', 'right']:
@@ -526,19 +545,27 @@ def keyUp(key, logScreenshot=None, _pause=True):
     extra = ctypes.c_ulong(0)
     ii_ = Input_I()
     ii_.ki = KeyBdInput(0, hexKeyCode, keybdFlags, 0, ctypes.pointer(extra))
-    x = Input( ctypes.c_ulong(1), ii_)
-    SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+    x = Input(ctypes.c_ulong(1), ii_)
+
+    # SendInput returns the number of event successfully inserted into input stream
+    # https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput#return-value
+    insertedEvents += SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
     # if numlock is on and an arrow key is being pressed, we need to send an additional scancode
     # https://stackoverflow.com/questions/14026496/sendinput-sends-num8-when-i-want-to-send-vk-up-how-come
     # https://handmade.network/wiki/2823-keyboard_inputs_-_scancodes,_raw_input,_text_input,_key_names
     if key in ['up', 'left', 'down', 'right'] and ctypes.windll.user32.GetKeyState(0x90):
+        # We need to press two keys, so we expect to have inserted 2 events when done
+        expectedEvents = 2
         hexKeyCode = 0xE0
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
         ii_.ki = KeyBdInput(0, hexKeyCode, KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP, 0, ctypes.pointer(extra))
-        x = Input( ctypes.c_ulong(1), ii_)
-        SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+        x = Input(ctypes.c_ulong(1), ii_)
+        insertedEvents += SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+
+    return insertedEvents == expectedEvents
+
 
 # Ignored parameters: logScreenshot
 # nearly identical to PyAutoGUI's implementation
@@ -547,7 +574,7 @@ def press(keys, presses=1, interval=0.0, logScreenshot=None, _pause=True):
     if type(keys) == str:
         if len(keys) > 1:
             keys = keys.lower()
-        keys = [keys] # If keys is 'enter', convert it to ['enter'].
+        keys = [keys]  # If keys is 'enter', convert it to ['enter'].
     else:
         lowerKeys = []
         for s in keys:
@@ -557,12 +584,23 @@ def press(keys, presses=1, interval=0.0, logScreenshot=None, _pause=True):
                 lowerKeys.append(s)
         keys = lowerKeys
     interval = float(interval)
+
+    # We need to press x keys y times, which comes out to x*y presses in total
+    expectedPresses = presses * len(keys)
+    completedPresses = 0
+
     for i in range(presses):
         for k in keys:
             failSafeCheck()
-            keyDown(k)
-            keyUp(k)
+            downed = keyDown(k)
+            upped = keyUp(k)
+            # Count key press as complete if key was "downed" and "upped" successfully
+            if downed and upped:
+                completedPresses += 1
+
         time.sleep(interval)
+
+    return completedPresses == expectedPresses
 
 
 # Ignored parameters: logScreenshot
@@ -576,17 +614,8 @@ def typewrite(message, interval=0.0, logScreenshot=None, _pause=True):
         press(c, _pause=False)
         time.sleep(interval)
         failSafeCheck()
+
+
 write = typewrite
 
-
 # Missing feature: hotkey functions
-
-if __name__ == '__main__':
-    moveTo(100, 150) # Move the mouse to the x, y coordinates 100, 150.
-    click() # Click the mouse at its current location.
-    click(200, 220) # Click the mouse at the x, y coordinates 200, 220.
-    move(None, 10)  # Move mouse 10 pixels down, that is, move the mouse relative to its current position.
-    doubleClick() # Double click the mouse at the
-    press('esc') # Simulate pressing the Escape key.
-    keyDown('shift')
-    keyUp('shift')
