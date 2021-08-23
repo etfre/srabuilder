@@ -142,5 +142,5 @@ class ParsedRule(MappingRule):
 
         parsed_mapping = {}
         for k, v in mapping.items():
-            parsed_mapping[k] = srabuilder.actions.parse(v, text_fn=text_fn, key_fn=key_fn) if isinstance(v, str) else v
+            parsed_mapping[k] = srabuilder.actions.parse(v, text_fn=text_fn, key_fn=key_fn) if isinstance(v, str) and not isinstance(v, Text) else v
         super().__init__(mapping=parsed_mapping, exported=False, **kwargs)
