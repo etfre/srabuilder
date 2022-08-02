@@ -6,7 +6,7 @@ cx-Freeze==6.9
 cx-Logging==3.0
 decorator==5.1.0
 dfly-breathe==0.2.4
-dragonfly2==0.34.0
+dragonfly2==0.35.0
 idna==3.3
 importlib-metadata==4.8.2
 json-rpc==1.13.0
