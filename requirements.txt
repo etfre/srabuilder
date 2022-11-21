@@ -2,8 +2,6 @@ certifi==2021.10.8
 cffi==1.15.0
 charset-normalizer==2.0.9
 comtypes==1.1.10
-cx-Freeze==6.13.1
-cx-Logging==3.1.0
 decorator==5.1.0
 dfly-breathe==0.2.4
 dragonfly2==0.35.0
