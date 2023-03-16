@@ -13,8 +13,8 @@ def _parse_requirements(filename: str) -> List[str]:
 install_requires= [
     "dfly-breathe",
     "sounddevice",
-    "dragonfly[kaldi]",
-    "webrtcvad-wheels == 2.0.*"
+    "kaldi-active-grammar",
+    "webrtcvad-wheels",
 ]
 
 setup(
