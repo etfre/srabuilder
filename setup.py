@@ -15,7 +15,7 @@ setup(
     version='0.0.1',
     packages=find_packages(),
     # install_requires=_parse_requirements('requirements.txt'),
-    install_requires='''dfly-breathe; git+https://github.com/tiaxrulesall/kaldi-active-grammar/releases/download/mac-build-hotfix/kaldi_active_grammar-3.1.0-py2.py3-none-macosx_13_0_arm64.whl;'''
+    # install_requires='''dfly-breathe; git+https://github.com/tiaxrulesall/kaldi-active-grammar/releases/download/mac-build-hotfix/kaldi_active_grammar-3.1.0-py2.py3-none-macosx_13_0_arm64.whl;'''
     license='MIT',
     long_description='placeholder',
 )
