@@ -11,7 +11,10 @@ def _parse_requirements(filename: str) -> List[str]:
     return distutils.text_file.TextFile(filename=str(Path(__file__).with_name(filename))).readlines()
 
 install_requires= [
-    "dfly-breathe", 
+    "dfly-breathe",
+    "sounddevice",
+    "dragonfly[kaldi]",
+    "webrtcvad-wheels == 2.0.*"
 ]
 
 setup(
