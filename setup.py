@@ -12,7 +12,6 @@ def _parse_requirements(filename: str) -> List[str]:
 
 install_requires= [
     "dfly-breathe", 
-    "git+https://github.com/tiaxrulesall/kaldi-active-grammar/releases/download/mac-build-hotfix/kaldi_active_grammar-3.1.0-py2.py3-none-macosx_13_0_arm64.whl"
 ]
 
 setup(
