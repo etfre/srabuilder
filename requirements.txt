@@ -1,4 +1,4 @@
 dfly-breathe
-sounddevice,
-dragonfly[kaldi],
-webrtcvad-wheels == 2.0.*
+sounddevice
+kaldi-active-grammar
+webrtcvad-wheels
